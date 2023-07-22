@@ -1,2 +1,2 @@
 # screenshot_py
-Simple application to capture screenshots
+Simple GUI Application to capture Screenshots.
