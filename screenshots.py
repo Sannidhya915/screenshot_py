@@ -10,10 +10,12 @@ A CLI based Screenshot application on Python.
 '''
 import time
 import pyautogui
+import tkinter as tk
 
 def screenshot():
     #Adding a 5 second delay so that execution doesn't occour immediately.
-    time.sleep(5)
+    #Disabled for GUI mode.
+    # time.sleep(5)
 
     #Screenshot file name generation.
     # --  --  --  --  --  --  --
@@ -26,11 +28,37 @@ def screenshot():
     ss_name = "SS"+date_time+".png"
     # --  --  --  --  --  --  --
 
+    #minimize app before capture and delay 1sec
+    root.iconify()
+    time.sleep(1)
+
     #screenshot function allows you to capture screenshots of your computer screen programmatically.
     #Captures the entire screen by default.
     ss = pyautogui.screenshot(ss_name)
 
     ss.show()
 
+    #restore minimized window app.
+    root.deiconify()
 
-screenshot()
+
+root = tk.Tk()
+root.title("SS App")
+frame = tk.Frame(root)
+frame.pack()
+
+button = tk.Button(
+    frame,
+    text = "Screenshot",
+    command = screenshot
+)
+button.pack(side = tk.LEFT)
+
+close = tk.Button(
+    frame,
+    text = "Quit",
+    command = quit
+)
+close.pack(side = tk.LEFT)
+
+root.mainloop()
